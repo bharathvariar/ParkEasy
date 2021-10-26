@@ -1,0 +1,34 @@
+.navbar {
+  display: grid;
+  grid-template-columns: repeat(5, 400px 1fr 1fr 1fr 1fr);
+  margin-top: 20px;
+  grid-gap: 20px;
+}
+li {
+  list-style: none;
+}
+li:nth-child(1) {
+  margin-right: 200px;
+  margin-left: 45px;
+}
+li:nth-child(2) {
+  margin-left: 900px;
+  font-size: 22px;
+}
+.navbar__link {
+  text-align: center;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-radius: 50px;
+}
+.navbar__link:not(:first-of-type) {
+  background-color: #17375b;
+  transition: transform 0.3s;
+}
+.navbar__link:not(:first-of-type):hover {
+  background-color: #4475e2;
+  cursor: pointer;
+  transform: translateY(3px);
+}
