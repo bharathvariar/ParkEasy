@@ -1,8 +1,15 @@
 .navbar {
   display: grid;
   grid-template-columns: repeat(5, 400px 1fr 1fr 1fr 1fr);
-  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   grid-gap: 20px;
+  background-color: #14273d;
+  font-weight: 700;
+  color: #fff;
+  font-size: 26px;
+  font-family: "Be Vietnam", sans-serif;
+  overflow: hidden;
 }
 li {
   list-style: none;
