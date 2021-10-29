@@ -10,7 +10,7 @@
 .homepage__content {
   margin-left: 60px;
   margin-bottom: 100px;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 .homepage__content > h3 {
   margin-top: -35px;
@@ -38,6 +38,9 @@
 }
 .btn {
   background-color: #4475e2;
+}
+.btn__link {
+  margin-right: 50px;
 }
 .homepage__image {
   margin-right: 50px;
