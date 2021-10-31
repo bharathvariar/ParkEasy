@@ -40,6 +40,7 @@ export default function SignIn() {
     console.log({
       email: data.get("email"),
       password: data.get("password"),
+      
     });
   };
 

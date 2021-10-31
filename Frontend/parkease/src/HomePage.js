@@ -11,7 +11,7 @@ export const HomePage = () => {
           <h3>To ParkEasy</h3>
           <hr />
           <p>
-            ParkEase is a website that books parking slots in advance for people
+            ParkEasy is a website that books parking slots in advance for people
             travelling to crowded locations.
           </p>
           <Link
