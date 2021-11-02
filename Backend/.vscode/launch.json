@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ParkeasyApplication<parkeasy>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.parkeasy.parkeasy.ParkeasyApplication",
+            "projectName": "parkeasy",
+            "args": ""
+        }
+    ]
+}
