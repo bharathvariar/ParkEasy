@@ -12,11 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
-    //Authentication
+    // Authentication
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        // Using in-memory authentication for now
-        // Setting configuration for auth object
         auth.inMemoryAuthentication().withUser("user1").password("1234").roles("USER").and().withUser("user2")
                 .password("1234").roles("USER").and().withUser("admin1").password("1234").roles("ADMIN");
 
@@ -29,13 +27,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    //Authorization
+    // Authorization
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers("/admin").hasRole("ADMIN")
-            .antMatchers("/user").hasAnyRole("ADMIN", "USER")
-            .antMatchers("/").permitAll()
-            .and().formLogin();
+        http.authorizeRequests().antMatchers("/admin").hasRole("ADMIN").antMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/").permitAll().and().formLogin();
     }
 
 }
