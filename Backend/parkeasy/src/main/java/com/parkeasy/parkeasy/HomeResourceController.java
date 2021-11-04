@@ -24,9 +24,4 @@ public class HomeResourceController {
         return "<h1> Welcome Admin </h1>";
     }
 
-    @GetMapping("/Hello")
-
-    public String Hello() {
-        return "<button> hello </button>";
-    }
 }
