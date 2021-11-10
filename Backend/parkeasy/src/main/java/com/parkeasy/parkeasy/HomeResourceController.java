@@ -31,6 +31,8 @@ public class HomeResourceController {
         return "<h1> Welcome Admin </h1>";
     }
 
+
+
     @PostMapping(path = "/user", consumes = { "application/json" })
     public ResponseEntity<?> addUser(@RequestBody AuthenticationRequest AuthenticationRequest) {
         String username = AuthenticationRequest.getUsername();
@@ -44,4 +46,5 @@ public class HomeResourceController {
         
         return ResponseEntity.ok(new AuthenticationResponse("Welcome" + username));
     }
+
 }
