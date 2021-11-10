@@ -1,4 +1,4 @@
-package com.parkeasy.parkeasy;
+package com.example.parkeasy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

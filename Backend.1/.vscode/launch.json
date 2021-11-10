@@ -6,7 +6,7 @@
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",
-            "mainClass": "com.parkeasy.parkeasy.ParkeasyApplication",
+            "mainClass": "com.example.parkeasy.ParkeasyApplication",
             "projectName": "parkeasy",
             "args": ""
         }
