@@ -1,5 +1,6 @@
 package server.user;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,9 +11,9 @@ import java.util.Objects;
 @Entity
 @Table(name = "users")
 public class User {
-    private @Id @GeneratedValue long id;
-    private @NotBlank String username;
-    private @NotBlank String password;
+    private @Id @Column(name="id") @GeneratedValue long id;
+    private @NotBlank @Column(name="username") String username;
+    private @NotBlank @Column(name="password") String password;
     private @NotBlank boolean loggedIn;
 
     public User() {
