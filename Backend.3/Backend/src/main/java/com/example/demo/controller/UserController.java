@@ -56,7 +56,7 @@ public class UserController {
 		for (User user : users) {
 			if (user.equals(newUser)) {
 				System.out.println("User Already exists!");
-				newUser.setUsername("null");
+				newUser.setUsername(null);
 				// return Status.USER_ALREADY_EXISTS;
 				return newUser;
 			}
