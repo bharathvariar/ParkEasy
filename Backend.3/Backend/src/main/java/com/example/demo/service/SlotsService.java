@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.model.Slots;
 
@@ -8,8 +9,10 @@ public interface SlotsService {
 	
 	Slots saveSlots(Slots slot);
 
-	List<Slots> getAllSlots();
+	Optional<Slots> getSlot(long id);
 
-	Slots updateSlots(Slots slot, long id);
+	List<Slots> getAllSlots();
+	
+	Slots updateSlots(Slots slot, long id, String chosenFeatures);
 
 }

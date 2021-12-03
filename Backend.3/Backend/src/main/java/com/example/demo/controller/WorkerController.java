@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/parkeasy/worker")
 public class WorkerController {
 
@@ -45,9 +47,17 @@ public class WorkerController {
     @CrossOrigin
     @PutMapping("{id}")
     public ResponseEntity<Worker> updateWorker(@PathVariable("id") long id,
-                            boolean newAvailability, @RequestBody Worker worker) {
-        return new ResponseEntity<Worker>(workerService.updateWorker(worker, id, newAvailability), HttpStatus.OK);
+            boolean isAvailable, @RequestBody Worker worker) {
+        return new ResponseEntity<Worker>(workerService.updateWorker(worker, id, isAvailable), HttpStatus.OK);
 
+    }
+    
+    @CrossOrigin
+    @DeleteMapping("/delete/{id}")
+    public String deleteWorker(@PathVariable long id) {
+        Worker worker = workerRepository.getOne(id);
+        workerRepository.delete(worker);
+        return "DELETED";
     }
     
 }

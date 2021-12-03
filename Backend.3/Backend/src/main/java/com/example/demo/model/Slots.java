@@ -22,11 +22,22 @@ public class Slots {
 
 	@Column(name = "status", nullable = false)
 	@JsonProperty(value = "status")
+	// -1 ->  Visible only to admin
+	// 0 -> Available to use
+	// 1 -> Not available, already booked
 	private int status;
 
 	@Column(name = "time", nullable = false)
 	@JsonProperty(value = "time")
 	private String time;
+
+	@Column(name = "chosenFeatures", nullable = false)
+	@JsonProperty(value = "chosenFeatures")
+	// 0 -> None Chosen
+	// 1 -> Valet Parking
+	// 2 -> Car Wash
+	// 3 -> Quick Service
+	private String chosenFeatures;
 
 	public long getId() {
 		return id;
@@ -50,6 +61,14 @@ public class Slots {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public String getChosenFeatures() {
+		return chosenFeatures;
+	}
+
+	public void setChosenFeatures(String chosenFeatures) {
+		this.chosenFeatures = chosenFeatures;
 	}
 
 }

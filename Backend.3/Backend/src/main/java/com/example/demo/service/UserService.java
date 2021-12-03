@@ -10,8 +10,7 @@ public interface UserService {
 	User saveUser(User user);
 
 	List<User> getAllUsers();
-
-	// NEW
+	
 	User logUserIn(User user, long id);
 
 	Status logoutUser(User user, long id);
