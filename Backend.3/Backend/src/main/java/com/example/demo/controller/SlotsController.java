@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,7 @@ public class SlotsController {
 		this.slotsService = slotsService;
 	}
 
+	@CrossOrigin
 	@PostMapping
 	@PutMapping
 	public ResponseEntity<Slots> saveSlots(@RequestBody Slots slot) {
@@ -35,20 +37,18 @@ public class SlotsController {
 
 	}
 
-	@GetMapping
+	@CrossOrigin
+	@GetMapping("{id}")
+	public Optional<Slots> getSlot(@PathVariable("id") long id) {
+		return slotsService.getSlot(id);
+	}
+	
+	@CrossOrigin
+	@GetMapping("/show")
 	public List<Slots> getAllslots() {
 		return slotsService.getAllSlots();
 
 	}
-
-	// @CrossOrigin
-	// @PutMapping("{id}")
-	// public ResponseEntity<Slots> updateSlot(@PathVariable("id") long id,
-	// @RequestBody Slots slot) {
-	// return new ResponseEntity<Slots>(slotsService.updateSlots(slot, id),
-	// HttpStatus.OK);
-
-	// }
 
 	@CrossOrigin
 	@PutMapping("{id}")
@@ -59,4 +59,5 @@ public class SlotsController {
 				HttpStatus.OK);
 
 	}
+
 }

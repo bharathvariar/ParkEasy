@@ -23,6 +23,7 @@ import com.example.demo.service.UserService;
 import com.example.demo.service.impl.Status;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/parkeasy/user")
 public class UserController {
 
@@ -35,6 +36,7 @@ public class UserController {
 		this.userService = userService;
 	}
 
+	@CrossOrigin
 	@PostMapping
 	@PutMapping
 	public ResponseEntity<User> saveUser(@RequestBody User user) {
@@ -42,6 +44,7 @@ public class UserController {
 
 	}
 
+	@CrossOrigin
 	@GetMapping
 	public List<User> getAllUsers() {
 		return userService.getAllUsers();
@@ -57,37 +60,14 @@ public class UserController {
 			if (user.equals(newUser)) {
 				System.out.println("User Already exists!");
 				newUser.setUsername(null);
-				// return Status.USER_ALREADY_EXISTS;
 				return newUser;
 			}
 		}
 		userRepository.save(newUser);
 		return newUser;
-		// return Status.SUCCESS;
 	}
 
-	// @CrossOrigin()
-	// @PostMapping("/login")
-	// public @Valid User loginUser(@Valid @RequestBody User user) {
-
-	// 	List<User> users = userRepository.findAll();
-
-	// 	for (User other : users) {
-	// 		if (other.equals(user)) {
-	// 			user.setLoggedIn(true);
-	// 			userRepository.save(user);
-	// 			// return Status.SUCCESS
-	// 			return user;
-	// 		}
-	// 	}
-
-	// 	// return Status.FAILURE
-	// 	user.setUsername("null");
-	// 	return user;
-	// }
-
-	// NEW
-
+	
 	@CrossOrigin
 	@PatchMapping("/login")
 	public ResponseEntity<User> loginUser(@Valid @RequestBody User user) {
@@ -99,29 +79,11 @@ public class UserController {
 				return new ResponseEntity<User>(userService.logUserIn(other, other.getId()), HttpStatus.OK);
 			}
 		}
-		// return Status.FAILURE
-		// user.setUsername("null");
-		// return user;
+		
 		user.setUsername(null);
 		return null;
 
 	}
-
-	// @CrossOrigin()
-	// @PostMapping("/logout")
-	// public Status logUserOut(@Valid @RequestBody User user) {
-	// 	List<User> users = userRepository.findAll();
-
-	// 	for (User other : users) {
-	// 		if (other.equals(user)) {
-	// 			user.setLoggedIn(false);
-	// 			userRepository.save(user);
-	// 			return Status.SUCCESS;
-	// 		}
-	// 	}
-
-	// 	return Status.FAILURE;
-	// }
 
 	@CrossOrigin
 	@PatchMapping("/logout")

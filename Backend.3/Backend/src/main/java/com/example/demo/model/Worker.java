@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -69,6 +71,21 @@ public class Worker {
         this.isAvailable = isAvailable;
     }
     
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Worker))
+            return false;
+        Worker worker = (Worker) o;
+        return Objects.equals(name, worker.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, phone, isAvailable);
+    }
+
     @Override
     public String toString() {
         return "Worker [id=" + id + ", isAvailable=" + isAvailable + ", name=" + name + ", phone=" + phone + "]";
