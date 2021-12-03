@@ -1,0 +1,15 @@
+.seat-picker {
+  margin: 0 auto !important;
+}
+.seat {
+  width: 60px !important;
+  height: 60px !important;
+}
+
+.seat {
+  border-radius: 20px !important;
+}
+
+.seat__number {
+  font-size: 20px !important;
+}

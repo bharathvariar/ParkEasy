@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 // import FormControlLabel from "@mui/material/FormControlLabel";
+import { useHistory } from "react-router-dom";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -32,16 +33,33 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+export default function SignUp(props) {
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get("email"),
+  //     password: data.get("password"),
+  //   });
+  //   axios
+  //     .post(`http://localhost:8080/parkeasy/user/register`, {
+  //       firstName: data.get("firstName"),
+  //       lastName: data.get("lastName"),
+  //       username: "user1",
+  //       email: data.get("email"),
+  //       password: data.get("password"),
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       var parts = response.data.email.split("@");
+  //       console.log(parts[0]);
+  //     });
+  // };
+  let history = useHistory();
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    props.handleRegister(event);
+    history.push("/Signin");
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
@@ -84,6 +102,16 @@ export default function SignUp() {
                   label='Last Name'
                   name='lastName'
                   autoComplete='family-name'
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id='username'
+                  label='Username'
+                  name='username'
+                  autoComplete='username'
                 />
               </Grid>
               <Grid item xs={12}>

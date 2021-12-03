@@ -1,6 +1,7 @@
 .homepage {
   /* display: grid;
   grid-template-columns: repeat(2, 200px, 1fr); */
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
