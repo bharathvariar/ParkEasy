@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import newpurple from "./newpurple.png";
+import axios from "axios";
 import "./HomePage.css";
 export const HomePage = () => {
   return (

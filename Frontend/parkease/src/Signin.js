@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useHistory } from "react-router-dom";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
@@ -32,18 +33,12 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      
-    });
-  };
-
+export default function SignIn(props) {
+  let history = useHistory();
+  function handleSubmit(event) {
+    var isSuc = props.handleLogin(event);
+    history.push("/Welcome");
+  }
   return (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
@@ -70,10 +65,10 @@ export default function SignIn() {
               margin='normal'
               required
               fullWidth
-              id='email'
-              label='Email Address'
-              name='email'
-              autoComplete='email'
+              id='username'
+              label='username'
+              name='username'
+              autoComplete='username'
               autoFocus
             />
             <TextField
