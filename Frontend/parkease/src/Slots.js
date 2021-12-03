@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
@@ -22,6 +23,7 @@ function Slots(props) {
   var row = [];
   var arr = [];
   var bookedSlot = [];
+  let history = useHistory();
   console.log(props.location.state.value.getTime());
   console.log(props.location.state.value2.getTime());
 
@@ -71,7 +73,14 @@ function Slots(props) {
     };
   }, []);
   const handleClick = () => {
-    console.log(row);
+    history.push({
+      pathname: "/services",
+      state: {
+        value: props.location.state.value,
+        value2: props.location.state.value2,
+        bookedSlot: bookedSlot,
+      },
+    });
   };
   const removeSeatCallback = ({ row, number, id }, removeCb) => {
     const newTooltip = ["A", "B", "C"].includes(row) ? null : "";

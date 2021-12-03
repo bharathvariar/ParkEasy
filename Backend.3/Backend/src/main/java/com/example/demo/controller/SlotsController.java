@@ -20,7 +20,7 @@ import com.example.demo.service.SlotsService;
 @CrossOrigin
 @RequestMapping("/parkeasy/slots")
 public class SlotsController {
-	
+
 	private SlotsService slotsService;
 
 	public SlotsController(SlotsService slotsService) {
@@ -28,6 +28,7 @@ public class SlotsController {
 		this.slotsService = slotsService;
 	}
 
+	@CrossOrigin
 	@PostMapping
 	@PutMapping
 	public ResponseEntity<Slots> saveSlots(@RequestBody Slots slot) {
@@ -35,6 +36,7 @@ public class SlotsController {
 
 	}
 
+	@CrossOrigin
 	@GetMapping
 	public List<Slots> getAllslots() {
 		return slotsService.getAllSlots();
