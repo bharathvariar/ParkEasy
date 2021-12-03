@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.List;
 
 import com.example.demo.model.Worker;
+import com.example.demo.service.impl.Status;
 
 public interface WorkerService {
 
@@ -10,6 +11,8 @@ public interface WorkerService {
 
     List<Worker> getAllWorkers();
 
-    Worker updateWorker(Worker Worker, long id, boolean newAvailability);
+    Status deleteWorker(Worker worker);
+
+    Worker updateWorker(Worker Worker, long id, boolean isAvailable);
 
 }

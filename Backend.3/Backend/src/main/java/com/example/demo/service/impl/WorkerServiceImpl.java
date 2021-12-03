@@ -33,16 +33,17 @@ public class WorkerServiceImpl implements WorkerService {
     public Worker updateWorker(Worker worker, long id, boolean isAvailable) {
         
         Worker existingWorker = workerRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("User", "Id", id));
-        if (isAvailable == true) {
-            existingWorker.setAvailablity(true);
-        }
-        else {
-            existingWorker.setAvailablity(false);
-        }
-
+                () -> new ResourceNotFoundException("Worker", "Id", id));
+        existingWorker.setAvailablity(worker.isAvailable());
         workerRepository.save(existingWorker);
         return existingWorker;
     }
-    
+
+    @Override
+    public Status deleteWorker(Worker worker) {
+        workerRepository.findById(worker.getId()).orElseThrow(
+                () -> new ResourceNotFoundException("Worker", "id", worker.getId()));
+        workerRepository.deleteById(worker.getId());
+        return Status.SUCCESS;
+    }
 }

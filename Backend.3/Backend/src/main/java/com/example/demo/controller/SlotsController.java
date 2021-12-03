@@ -20,7 +20,7 @@ import com.example.demo.service.SlotsService;
 @CrossOrigin
 @RequestMapping("/parkeasy/slots")
 public class SlotsController {
-	
+
 	private SlotsService slotsService;
 
 	public SlotsController(SlotsService slotsService) {
@@ -41,10 +41,22 @@ public class SlotsController {
 
 	}
 
+	// @CrossOrigin
+	// @PutMapping("{id}")
+	// public ResponseEntity<Slots> updateSlot(@PathVariable("id") long id,
+	// @RequestBody Slots slot) {
+	// return new ResponseEntity<Slots>(slotsService.updateSlots(slot, id),
+	// HttpStatus.OK);
+
+	// }
+
 	@CrossOrigin
 	@PutMapping("{id}")
-	public ResponseEntity<Slots> updateSlot(@PathVariable("id") long id, @RequestBody Slots slot) {
-		return new ResponseEntity<Slots>(slotsService.updateSlots(slot, id), HttpStatus.OK);
+	public ResponseEntity<Slots> updateSlot(@PathVariable("id") long id,
+			@RequestBody Slots slot, String chosenFeatures) {
+
+		return new ResponseEntity<Slots>(slotsService.updateSlots(slot, id, chosenFeatures),
+				HttpStatus.OK);
 
 	}
 }

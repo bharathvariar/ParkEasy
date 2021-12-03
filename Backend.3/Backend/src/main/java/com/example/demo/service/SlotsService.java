@@ -9,7 +9,7 @@ public interface SlotsService {
 	Slots saveSlots(Slots slot);
 
 	List<Slots> getAllSlots();
-
-	Slots updateSlots(Slots slot, long id);
+	
+	Slots updateSlots(Slots slot, long id, String chosenFeatures);
 
 }
