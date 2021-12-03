@@ -28,7 +28,7 @@ function Slots(props) {
   console.log(props.location.state.value2.getTime());
 
   React.useEffect(() => {
-    axios.get("http://localhost:8080/parkeasy/slots").then((resp) => {
+    axios.get("http://localhost:8080/parkeasy/slots/show").then((resp) => {
       console.log(resp.data[0]);
       var counter = 1;
       for (var i = 0; i < 6; i++) {
