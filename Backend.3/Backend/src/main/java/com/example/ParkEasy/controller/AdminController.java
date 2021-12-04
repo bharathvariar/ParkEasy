@@ -14,6 +14,7 @@ import com.example.ParkEasy.repository.WorkerRepository;
 import com.example.ParkEasy.service.AdminService;
 import com.example.ParkEasy.service.impl.Status;
 
+import org.hibernate.boot.registry.classloading.spi.ClassLoaderService.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -115,7 +116,6 @@ public class AdminController {
 
         for (Worker worker : workers) {
             if (worker.equals(newWorker)) {
-                System.out.println("Worker Already exists!");
                 return null;
             }
         }
