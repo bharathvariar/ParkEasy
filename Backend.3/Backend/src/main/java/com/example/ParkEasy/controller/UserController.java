@@ -58,7 +58,6 @@ public class UserController {
 
 		for (User user : users) {
 			if (user.equals(newUser)) {
-				System.out.println("User Already exists!");
 				return null;
 			}
 		}
@@ -77,8 +76,7 @@ public class UserController {
 				return new ResponseEntity<User>(userService.userLogin(other, other.getId()), HttpStatus.OK);
 			}
 		}
-
-		user.setUsername(null);
+		
 		return null;
 
 	}

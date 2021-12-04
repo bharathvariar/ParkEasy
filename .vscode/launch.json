@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ParkEasy",
+            "request": "launch",
+            "mainClass": "com.example.ParkEasy.ParkEasy",
+            "projectName": "demo"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-ParkEasy<demo>",
             "request": "launch",
             "cwd": "${workspaceFolder}",

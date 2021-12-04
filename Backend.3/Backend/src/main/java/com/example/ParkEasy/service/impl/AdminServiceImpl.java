@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.example.ParkEasy.exception.ResourceNotFoundException;
 import com.example.ParkEasy.model.Admin;
+import com.example.ParkEasy.model.SlotCounter;
 import com.example.ParkEasy.model.Slots;
 import com.example.ParkEasy.model.Worker;
 import com.example.ParkEasy.repository.AdminRepository;
+import com.example.ParkEasy.repository.SlotCounterRepository;
 import com.example.ParkEasy.repository.SlotsRepository;
 import com.example.ParkEasy.repository.UserRepository;
 import com.example.ParkEasy.repository.WorkerRepository;
@@ -21,13 +23,16 @@ public class AdminServiceImpl implements AdminService {
     private UserRepository userRepository;
     private SlotsRepository slotsRepository;
     private WorkerRepository workerRepository;
+    private SlotCounterRepository slotCounterRepository;
 
     public AdminServiceImpl(AdminRepository adminRepository, UserRepository userRepository,
-            SlotsRepository slotsRepository, WorkerRepository workerRepository) {
+            SlotsRepository slotsRepository, WorkerRepository workerRepository,
+            SlotCounterRepository slotCounterRepository) {
         this.adminRepository = adminRepository;
         this.userRepository = userRepository;
         this.slotsRepository = slotsRepository;
         this.workerRepository = workerRepository;
+        this.slotCounterRepository = slotCounterRepository;
     }
 
     @Override
@@ -77,6 +82,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<Worker> getAllWorkers() {
+        return workerRepository.findAll();
+    }
+
+    @Override
     public Status deleteWorker(Worker worker) {
         workerRepository.findById(worker.getId()).orElseThrow(
                 () -> new ResourceNotFoundException("Worker", "id", worker.getId()));
@@ -84,4 +94,21 @@ public class AdminServiceImpl implements AdminService {
         return Status.SUCCESS;
     }
 
+    @Override
+    public SlotCounter saveSlotCounter(SlotCounter slotcounter) {
+        return slotCounterRepository.save(slotcounter);
+
+    }
+
+    @Override
+    public SlotCounter updateSlotCounter(SlotCounter slotcounter,long id) {
+        SlotCounter existingslotcounter = slotCounterRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("SlotCounter", "Id", id));
+        existingslotcounter.setNumSlots(slotcounter.getNumSlots());
+        slotCounterRepository.save(existingslotcounter);
+
+        return existingslotcounter;
+    }
+
+    
 }
