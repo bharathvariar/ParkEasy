@@ -1,13 +1,13 @@
-package com.example.demo.service.impl;
+package com.example.ParkEasy.service.impl;
 
 import java.util.List;
 
-import org.springframework.stereotype.Service;
+import com.example.ParkEasy.exception.ResourceNotFoundException;
+import com.example.ParkEasy.model.User;
+import com.example.ParkEasy.repository.UserRepository;
+import com.example.ParkEasy.service.UserService;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UserService;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,12 +20,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<com.example.demo.model.User> getAllUsers() {
+	public List<com.example.ParkEasy.model.User> getAllUsers() {
 		return userRepository.findAll();
 	}
 
 	@Override
-	public com.example.demo.model.User saveUser(com.example.demo.model.User user) {
+	public com.example.ParkEasy.model.User saveUser(com.example.ParkEasy.model.User user) {
 		return userRepository.save(user);
 	}
 

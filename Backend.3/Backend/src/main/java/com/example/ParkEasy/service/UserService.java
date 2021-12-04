@@ -1,9 +1,9 @@
-package com.example.demo.service;
+package com.example.ParkEasy.service;
 
 import java.util.List;
 
-import com.example.demo.model.User;
-import com.example.demo.service.impl.Status;
+import com.example.ParkEasy.model.User;
+import com.example.ParkEasy.service.impl.Status;
 
 public interface UserService {
 

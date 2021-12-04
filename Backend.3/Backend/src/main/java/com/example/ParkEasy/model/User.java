@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.ParkEasy.model;
 
 import java.util.Objects;
 

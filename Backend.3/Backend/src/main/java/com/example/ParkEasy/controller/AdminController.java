@@ -1,18 +1,18 @@
-package com.example.demo.controller;
+package com.example.ParkEasy.controller;
 
 import java.util.List;
 
 import javax.validation.Valid;
 
-import com.example.demo.model.Admin;
-import com.example.demo.model.Slots;
-import com.example.demo.model.Worker;
-import com.example.demo.repository.AdminRepository;
-import com.example.demo.repository.SlotsRepository;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.repository.WorkerRepository;
-import com.example.demo.service.impl.Status;
-import com.example.demo.service.AdminService;
+import com.example.ParkEasy.model.Admin;
+import com.example.ParkEasy.model.Slots;
+import com.example.ParkEasy.model.Worker;
+import com.example.ParkEasy.repository.AdminRepository;
+import com.example.ParkEasy.repository.SlotsRepository;
+import com.example.ParkEasy.repository.UserRepository;
+import com.example.ParkEasy.repository.WorkerRepository;
+import com.example.ParkEasy.service.AdminService;
+import com.example.ParkEasy.service.impl.Status;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

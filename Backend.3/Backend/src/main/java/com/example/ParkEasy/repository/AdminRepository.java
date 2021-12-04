@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.example.ParkEasy.repository;
 
-import com.example.demo.model.Admin;
+import com.example.ParkEasy.model.Admin;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

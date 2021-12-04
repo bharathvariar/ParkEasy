@@ -1,10 +1,10 @@
-package com.example.demo.controller;
+package com.example.ParkEasy.controller;
 
 import java.util.List;
 
-import com.example.demo.model.Worker;
-import com.example.demo.repository.WorkerRepository;
-import com.example.demo.service.WorkerService;
+import com.example.ParkEasy.model.Worker;
+import com.example.ParkEasy.repository.WorkerRepository;
+import com.example.ParkEasy.service.WorkerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
