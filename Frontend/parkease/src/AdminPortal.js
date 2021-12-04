@@ -20,8 +20,13 @@ const theme = createTheme();
 const columns = [
   {
     field: "id",
-    headerName: "ID",
+    headerName: "S.no",
     width: 70,
+  },
+  {
+    field: "CheckedIn",
+    headerName: "Checked IN",
+    width: 100,
   },
   {
     field: "fullName",
@@ -35,12 +40,12 @@ const columns = [
   },
   { field: "Phone", headerName: "Phone", width: 140 },
   {
-    field: "Name",
-    headerName: "name",
+    field: "WorkingID",
+    headerName: "Worker ID",
     description: "This column has a value getter and is not sortable.",
     sortable: false,
-    width: 160,
-    valueGetter: (params) => `${params.getValue(params.id, "fullName") || ""} `,
+    width: 100,
+    valueGetter: (params) => `${params.getValue(params.id, "id") || ""} `,
   },
 ];
 
@@ -60,6 +65,8 @@ function AdminPortal(props) {
           var lst = {
             id: resp.data[k].id,
             fullName: resp.data[k].name,
+            Phone: resp.data[k].phone,
+            CheckedIn: resp.data[k].isAvailable,
           };
           rows = Object.assign([], rows);
           rows.push(lst);
@@ -69,11 +76,55 @@ function AdminPortal(props) {
       });
     return () => {};
   }, []);
+  const handleChange = (event) => {
+    event.preventDefault();
+    setLop([]);
+  };
+  const handleAddWorker = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    axios
+      .post("http://localhost:8080/parkeasy/admin/worker/add", {
+        name: data.get("name"),
+        phone: data.get("phone"),
+      })
+      .then((resp) => {
+        axios
+          .get("http://localhost:8080/parkeasy/admin/worker/show")
+          .then((resp) => {
+            console.log(resp.data);
+            for (var k = 0; k < resp.data.length; k++) {
+              var lst = {
+                id: resp.data[k].id,
+                fullName: resp.data[k].name,
+                Phone: resp.data[k].phone,
+                CheckedIn: resp.data[k].isAvailable,
+              };
+              rows = Object.assign([], rows);
+              rows.push(lst);
+            }
+            console.log(rows);
+            setLop(rows);
+          });
+      });
+  };
+  const handleAdmin = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log(data.get("admin"));
+    axios
+      .post("http://localhost:8080/parkeasy/admin", {
+        password: data.get("admin"),
+      })
+      .then((resp) => {
+        alert(`Admin added with id ${resp.data.adminId}`);
+      });
+  };
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {/* <h1>{props.location.state.counter}</h1> */}
-      <Box sx={{ height: 400, width: "100%", marginTop: "30px" }}>
+      <Box sx={{ height: 333, width: "100%", marginTop: "30px" }}>
         <DataGrid
           rows={lop}
           columns={columns}
@@ -88,7 +139,6 @@ function AdminPortal(props) {
         />
       </Box>
       <Box
-        component='form'
         sx={{
           "& > :not(style)": { m: 1, width: "25ch" },
           display: "flex",
@@ -96,7 +146,7 @@ function AdminPortal(props) {
         }}
         noValidate
         autoComplete='off'>
-        <Box component='form'>
+        <Box component='form' onSubmit={handleChange}>
           <TextField
             margin='normal'
             id='outlined-basic'
@@ -116,11 +166,12 @@ function AdminPortal(props) {
             Add Rows
           </Button>
         </Box>
-        <Box component='form'>
+        <Box component='form' onSubmit={handleAdmin}>
           <TextField
             margin='normal'
             id='outlined-basic'
             label='Add Admin Password'
+            name='admin'
             variant='outlined'
           />
           <Button
@@ -136,11 +187,12 @@ function AdminPortal(props) {
             Add Admin
           </Button>
         </Box>
-        <Box component='form'>
+        <Box component='form' onSubmit={handleAddWorker}>
           <TextField
             id='outlined-basic'
             margin='normal'
             label='Worker Name'
+            name='name'
             variant='outlined'
           />
 
@@ -148,6 +200,7 @@ function AdminPortal(props) {
             id='outlined-basic'
             margin='normal'
             label='Worker Phone Number'
+            name='phone'
             variant='outlined'
           />
           <Button

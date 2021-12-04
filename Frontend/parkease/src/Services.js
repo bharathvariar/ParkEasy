@@ -164,7 +164,7 @@ function Services(props) {
             </Button>
           </FormControl>
           <Typography variant='caption' display='block' gutterBottom>
-            Any damage to your car will not be our responsibility
+            *Subject to availability of workers
           </Typography>
         </Box>
       </Container>
