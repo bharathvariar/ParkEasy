@@ -5,9 +5,11 @@ import java.util.List;
 import javax.validation.Valid;
 
 import com.example.ParkEasy.model.Admin;
+import com.example.ParkEasy.model.SlotCounter;
 import com.example.ParkEasy.model.Slots;
 import com.example.ParkEasy.model.Worker;
 import com.example.ParkEasy.repository.AdminRepository;
+import com.example.ParkEasy.repository.SlotCounterRepository;
 import com.example.ParkEasy.repository.SlotsRepository;
 import com.example.ParkEasy.repository.UserRepository;
 import com.example.ParkEasy.repository.WorkerRepository;
@@ -44,6 +46,8 @@ public class AdminController {
     SlotsRepository slotsRepository;
     @Autowired
     WorkerRepository workerRepository;
+    @Autowired
+    SlotCounterRepository slotCounterRepository;
 
     public AdminController(AdminService adminService) {
         this.adminService = adminService;
@@ -69,7 +73,6 @@ public class AdminController {
         }
 
         return null;
-
     }
 
     @CrossOrigin
@@ -124,6 +127,12 @@ public class AdminController {
     }
 
     @CrossOrigin
+    @GetMapping("/worker/show")
+    public List<Worker> getAllWorkers() {
+        return adminService.getAllWorkers();
+    }
+
+    @CrossOrigin
     @DeleteMapping("/worker/delete/{id}")
     public String deleteWorker(@PathVariable long id) {
         Worker worker = workerRepository.getOne(id);
@@ -131,4 +140,24 @@ public class AdminController {
         return "DELETED";
     }
 
+    @CrossOrigin
+    @PostMapping("/slotcounter")
+    public ResponseEntity<SlotCounter> saveSlotCounter(@RequestBody SlotCounter slotcounter) {
+        return new ResponseEntity<SlotCounter>(adminService.saveSlotCounter(slotcounter), HttpStatus.CREATED);
+    }
+
+    @CrossOrigin
+    @PatchMapping("/slotcounter/{id}")
+    public ResponseEntity<SlotCounter> updateSlotCounter(@RequestBody SlotCounter slotCounter,
+            @PathVariable ("id") long id) {
+        
+        List<SlotCounter> slotCounterList = slotCounterRepository.findAll();
+
+        for (SlotCounter other : slotCounterList) {
+            if (other.equals(slotCounter)) {
+                return new ResponseEntity<SlotCounter>(adminService.updateSlotCounter(slotCounter, id), HttpStatus.OK);
+            }
+        }
+        return null;
+    }
 }

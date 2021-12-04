@@ -3,6 +3,7 @@ package com.example.ParkEasy.service;
 import java.util.List;
 
 import com.example.ParkEasy.model.Admin;
+import com.example.ParkEasy.model.SlotCounter;
 import com.example.ParkEasy.model.Slots;
 import com.example.ParkEasy.model.Worker;
 import com.example.ParkEasy.service.impl.Status;
@@ -23,6 +24,12 @@ public interface AdminService {
 
     Worker saveWorker(Worker worker);
 
+    List<Worker> getAllWorkers();
+
     Status deleteWorker(Worker worker);
+
+    SlotCounter saveSlotCounter(SlotCounter slotcounter);
+
+    SlotCounter updateSlotCounter(SlotCounter slotcounter, long id);
 
 }
