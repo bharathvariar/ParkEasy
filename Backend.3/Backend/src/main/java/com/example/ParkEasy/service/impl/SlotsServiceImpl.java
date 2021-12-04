@@ -1,15 +1,14 @@
-package com.example.demo.service.impl;
+package com.example.ParkEasy.service.impl;
 
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.Slots;
-
-import com.example.demo.repository.SlotsRepository;
-import com.example.demo.service.SlotsService;
+import com.example.ParkEasy.exception.ResourceNotFoundException;
+import com.example.ParkEasy.model.Slots;
+import com.example.ParkEasy.repository.SlotsRepository;
+import com.example.ParkEasy.service.SlotsService;
 
 @Service
 public class SlotsServiceImpl implements SlotsService {

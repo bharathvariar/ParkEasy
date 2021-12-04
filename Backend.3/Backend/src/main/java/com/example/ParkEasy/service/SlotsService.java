@@ -1,9 +1,9 @@
-package com.example.demo.service;
+package com.example.ParkEasy.service;
 
 import java.util.List;
 import java.util.Optional;
 
-import com.example.demo.model.Slots;
+import com.example.ParkEasy.model.Slots;
 
 public interface SlotsService {
 

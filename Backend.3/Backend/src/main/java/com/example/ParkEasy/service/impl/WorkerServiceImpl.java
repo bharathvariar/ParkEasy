@@ -1,11 +1,11 @@
-package com.example.demo.service.impl;
+package com.example.ParkEasy.service.impl;
 
 import java.util.List;
 
-import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.model.Worker;
-import com.example.demo.repository.WorkerRepository;
-import com.example.demo.service.WorkerService;
+import com.example.ParkEasy.exception.ResourceNotFoundException;
+import com.example.ParkEasy.model.Worker;
+import com.example.ParkEasy.repository.WorkerRepository;
+import com.example.ParkEasy.service.WorkerService;
 
 import org.springframework.stereotype.Service;
 
