@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class WorkerServiceImpl implements WorkerService {
 
     private WorkerRepository workerRepository;
-    
+
     public WorkerServiceImpl(WorkerRepository workerRepository) {
         super();
         this.workerRepository = workerRepository;
@@ -31,7 +31,7 @@ public class WorkerServiceImpl implements WorkerService {
 
     @Override
     public Worker updateWorker(Worker worker, long id, boolean isAvailable) {
-        
+
         Worker existingWorker = workerRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Worker", "Id", id));
         existingWorker.setAvailablity(worker.isAvailable());

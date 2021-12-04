@@ -27,7 +27,7 @@ public class WorkerController {
     private WorkerService workerService;
     @Autowired
     WorkerRepository workerRepository;
-    
+
     public WorkerController(WorkerService workerService) {
         super();
         this.workerService = workerService;
@@ -43,7 +43,7 @@ public class WorkerController {
     public List<Worker> getAllWorkers() {
         return workerService.getAllWorkers();
     }
-    
+
     @CrossOrigin
     @PutMapping("{id}")
     public ResponseEntity<Worker> updateWorker(@PathVariable("id") long id,
@@ -51,7 +51,7 @@ public class WorkerController {
         return new ResponseEntity<Worker>(workerService.updateWorker(worker, id, isAvailable), HttpStatus.OK);
 
     }
-    
+
     @CrossOrigin
     @DeleteMapping("/delete/{id}")
     public String deleteWorker(@PathVariable long id) {
@@ -59,5 +59,5 @@ public class WorkerController {
         workerRepository.delete(worker);
         return "DELETED";
     }
-    
+
 }

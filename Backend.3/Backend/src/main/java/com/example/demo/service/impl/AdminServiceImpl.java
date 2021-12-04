@@ -36,6 +36,26 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Admin adminLogin(Admin admin, long adminId) {
+        Admin existingAdmin = adminRepository.findById(adminId).orElseThrow(
+                () -> new ResourceNotFoundException("User", "Id", adminId));
+        existingAdmin.setLoggedIn(true);
+        adminRepository.save(existingAdmin);
+
+        return existingAdmin;
+    }
+
+    @Override
+    public Status adminLogout(Admin admin, long adminId) {
+        Admin existingAdmin = adminRepository.findById(adminId).orElseThrow(
+                () -> new ResourceNotFoundException("User", "Id", adminId));
+        existingAdmin.setLoggedIn(false);
+        adminRepository.save(existingAdmin);
+
+        return Status.SUCCESS;
+    }
+
+    @Override
     public Status deleteUsers() {
         userRepository.deleteAll();
         return Status.SUCCESS;
@@ -45,7 +65,7 @@ public class AdminServiceImpl implements AdminService {
     public Slots saveSlots(Slots slot) {
         return slotsRepository.save(slot);
     }
-    
+
     @Override
     public List<Slots> getAllSlots() {
         return slotsRepository.findAll();
@@ -56,7 +76,6 @@ public class AdminServiceImpl implements AdminService {
         return workerRepository.save(worker);
     }
 
-
     @Override
     public Status deleteWorker(Worker worker) {
         workerRepository.findById(worker.getId()).orElseThrow(
@@ -65,5 +84,4 @@ public class AdminServiceImpl implements AdminService {
         return Status.SUCCESS;
     }
 
- 
 }

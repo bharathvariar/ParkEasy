@@ -8,17 +8,21 @@ import com.example.demo.model.Worker;
 import com.example.demo.service.impl.Status;
 
 public interface AdminService {
-    
+
     Admin saveAdmin(Admin admin);
-    
+
+    Admin adminLogin(Admin admin, long adminId);
+
+    Status adminLogout(Admin admin, long adminId);
+
     Status deleteUsers();
 
     Slots saveSlots(Slots slot);
-    
+
     List<Slots> getAllSlots();
 
     Worker saveWorker(Worker worker);
-    
+
     Status deleteWorker(Worker worker);
 
 }
