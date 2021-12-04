@@ -31,27 +31,34 @@ function Slots(props) {
     axios.get("http://localhost:8080/parkeasy/slots/show").then((resp) => {
       console.log(resp.data[0]);
       var counter = 1;
-      for (var i = 0; i < 6; i++) {
+      for (var k = 0; k < 6; k++) {
         arr = [];
         for (var j = 0; j < 6; j++) {
+          console.log("j=" + j);
           var lst = {};
           lst["id"] = counter;
           lst["isReserved"] = false;
           lst["number"] = counter;
-          if (resp.data[counter - 1].status == -1) {
-            if ((resp.data[counter - 1].time = "")) {
+          console.log("counter+ " + counter);
+          if (resp.data[counter - 1].status != 0) {
+            if (resp.data[counter - 1].time == "") {
               lst["isReserved"] = false;
             } else {
               var s = resp.data[counter - 1].time;
               lst["isReserved"] = false;
-              for (var i in s) {
-                var parts = i.splice("-");
+              var part = s.split(",");
+              console.log("part+ " + part);
+              console.log(typeof part);
+
+              var parts = part.toString().split("-");
+              console.log("parts+ " + parts);
+              console.log("parts[0] " + parts[0]);
+              for (var i = 0; i < parts.length; i += 2) {
                 if (
                   Number(parts[1]) >= props.location.state.value.getTime() &&
                   Number(parts[0]) <= props.location.state.value.getTime()
                 ) {
                   lst["isReserved"] = true;
-                  break;
                 } else if (
                   Number(parts[1]) <= props.location.state.value.getTime() &&
                   Number(parts[0]) >= props.location.state.value.getTime()
@@ -65,6 +72,7 @@ function Slots(props) {
           arr.push(lst);
           if (counter % 2 == 0) arr.push(null);
         }
+
         row.push(arr);
       }
     });
@@ -139,6 +147,9 @@ function Slots(props) {
             }}>
             Proceed to Services!
           </Button>
+          <Typography variant='caption' display='block' gutterBottom>
+            You can only choose maximum of 3 slots
+          </Typography>
         </Box>
       </Container>
     </ThemeProvider>

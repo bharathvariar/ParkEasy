@@ -12,6 +12,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -21,6 +22,7 @@ function Services(props) {
     CarWash: false,
     DeepClean: false,
   });
+  let history = useHistory();
   const { Valet, CarWash, DeepClean } = state;
   const error = [Valet, CarWash, DeepClean].filter((v) => v).length !== 2;
   const handleChange = (event) => {
@@ -43,17 +45,53 @@ function Services(props) {
     console.log(stri);
     console.log(time);
 
-    for (var i in bookedSlot) {
+    axios
+      .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[0]}`)
+      .then((response) => {
+        console.log(response.data);
+        axios
+          .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[0]}`, {
+            status: 1,
+            time: response.data.time ? response.data.time + "," : "" + time,
+            chosenFeatures: response.data.chosenFeatures + "," + stri,
+          })
+          .then((resp) => {
+            console.log(resp.data);
+          });
+      });
+    if (bookedSlot.length > 1) {
       axios
-        .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[i]}`, {
-          status: "1",
-          time: time,
-          chosenFeatures: stri,
-        })
+        .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[1]}`)
         .then((response) => {
           console.log(response.data);
+          axios
+            .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[1]}`, {
+              status: 1,
+              time: response.data.time ? response.data.time + "," : "" + time,
+              chosenFeatures: response.data.chosenFeatures + "," + stri,
+            })
+            .then((resp) => {
+              console.log(resp.data);
+            });
         });
     }
+    if (bookedSlot.length > 2) {
+      axios
+        .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[2]}`)
+        .then((response) => {
+          console.log(response.data);
+          axios
+            .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[2]}`, {
+              status: 1,
+              time: response.data.time ? response.data.time + "," : "" + time,
+              chosenFeatures: response.data.chosenFeatures + "," + stri,
+            })
+            .then((resp) => {
+              console.log(resp.data);
+            });
+        });
+    }
+    history.push("/checkout");
   };
   return (
     <ThemeProvider theme={theme}>
@@ -125,6 +163,9 @@ function Services(props) {
               Proceed to Checkout!
             </Button>
           </FormControl>
+          <Typography variant='caption' display='block' gutterBottom>
+            Any damage to your car will not be our responsibility
+          </Typography>
         </Box>
       </Container>
     </ThemeProvider>
