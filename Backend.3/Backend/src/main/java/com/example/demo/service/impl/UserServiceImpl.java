@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
 	// NEW
 	@Override
-	public User logUserIn(User user, long id) {
+	public User userLogin(User user, long id) {
 
 		User existingUser = userRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("User", "Id", id));
@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public Status logoutUser(User user, long id) {
-		
+	public Status userLogout(User user, long id) {
+
 		User existingUser = userRepository.findById(id).orElseThrow(
 				() -> new ResourceNotFoundException("User", "Id", id));
 		existingUser.setLoggedIn(false);

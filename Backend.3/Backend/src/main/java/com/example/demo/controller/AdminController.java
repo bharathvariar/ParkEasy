@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -55,6 +56,38 @@ public class AdminController {
     }
 
     @CrossOrigin
+    @PatchMapping("/login")
+    public ResponseEntity<Admin> loginAdmin(@Valid @RequestBody Admin admin) {
+
+        List<Admin> admins = adminRepository.findAll();
+
+        for (Admin other : admins) {
+            if (other.equals(admin)) {
+                return new ResponseEntity<Admin>(adminService.adminLogin(other, other.getAdminId()), HttpStatus.OK);
+            }
+        }
+
+        return null;
+
+    }
+
+    @CrossOrigin
+    @PatchMapping("/logout")
+    public Status logoutAdmin(@Valid @RequestBody Admin admin) {
+
+        List<Admin> admins = adminRepository.findAll();
+
+        for (Admin other : admins) {
+            if (other.equals(admin)) {
+
+                return (adminService.adminLogout(other, other.getAdminId()));
+            }
+        }
+
+        return Status.FAILURE;
+    }
+
+    @CrossOrigin
     @DeleteMapping("/user/deleteall")
     public Status deleteUsers() {
         userRepository.deleteAll();
@@ -77,15 +110,13 @@ public class AdminController {
     @PostMapping("/worker/add")
     @PutMapping("/worker/add")
     public ResponseEntity<Worker> saveWorker(@Valid @RequestBody Worker newWorker) {
-        
+
         List<Worker> workers = workerRepository.findAll();
 
         for (Worker worker : workers) {
             if (worker.equals(newWorker)) {
                 System.out.println("Worker Already exists!");
-                newWorker.setName(null);
-                // return Status.USER_ALREADY_EXISTS;
-                return new ResponseEntity<Worker>(adminService.saveWorker(newWorker), HttpStatus.CREATED);
+                return null;
             }
         }
         workerRepository.save(newWorker);

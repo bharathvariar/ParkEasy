@@ -23,7 +23,7 @@ public class Worker {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    
+
     @NotBlank
     @Column(name = "name")
     @JsonProperty(value = "name")
@@ -70,7 +70,7 @@ public class Worker {
     public void setAvailablity(boolean isAvailable) {
         this.isAvailable = isAvailable;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -90,5 +90,5 @@ public class Worker {
     public String toString() {
         return "Worker [id=" + id + ", isAvailable=" + isAvailable + ", name=" + name + ", phone=" + phone + "]";
     }
-    
+
 }

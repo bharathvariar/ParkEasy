@@ -38,14 +38,14 @@ public class SlotsController {
 	}
 
 	@CrossOrigin
-  @GetMapping("{id}")
+	@GetMapping("{id}")
 	public Optional<Slots> getSlot(@PathVariable("id") long id) {
 		return slotsService.getSlot(id);
 	}
-	
-  @CrossOrigin
+
+	@CrossOrigin
 	@GetMapping("/show")
-  public List<Slots> getAllslots() {
+	public List<Slots> getAllslots() {
 		return slotsService.getAllSlots();
 
 	}

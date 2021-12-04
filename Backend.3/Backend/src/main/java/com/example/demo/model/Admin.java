@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,7 @@ import lombok.Data;
 @Entity
 @Table(name = "admins")
 public class Admin {
-    
+
     @Id
     @Column(name = "adminId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +28,20 @@ public class Admin {
     @Column(name = "password")
     @JsonProperty(value = "password")
     private String password;
+
+    @NotBlank
+    @Column(name = "isLoggedIn")
+    @JsonProperty(value = "isLoggeddIn")
+    private boolean isLoggedIn;
+
+    public Admin() {
+    }
+
+    public Admin(long adminId, @NotBlank String password) {
+        this.adminId = adminId;
+        this.password = password;
+        this.isLoggedIn = false;
+    }
 
     public long getAdminId() {
         return adminId;
@@ -42,5 +58,28 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
+    public boolean getIsLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public void setLoggedIn(boolean isLoggedIn) {
+        this.isLoggedIn = isLoggedIn;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Admin))
+            return false;
+        Admin admin = (Admin) o;
+        return Objects.equals(adminId, admin.adminId) && Objects.equals(password, admin.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(adminId, password, isLoggedIn);
+    }
+
 }

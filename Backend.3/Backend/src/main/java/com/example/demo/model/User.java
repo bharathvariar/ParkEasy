@@ -23,7 +23,7 @@ public class User {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@NotBlank
 	@Column(name = "username")
 	@JsonProperty(value = "username")
@@ -33,7 +33,7 @@ public class User {
 	@Column(name = "password")
 	@JsonProperty(value = "password")
 	private String password;
-	
+
 	@Column(name = "first_name", nullable = false)
 	@JsonProperty(value = "firstName")
 	private String firstName;
@@ -77,7 +77,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getFirstName() {
 		return firstName;
 	}
@@ -85,11 +85,11 @@ public class User {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	public String getLastName() {
 		return lastName;
 	}
-	
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}

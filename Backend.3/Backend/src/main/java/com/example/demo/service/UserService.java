@@ -6,12 +6,12 @@ import com.example.demo.model.User;
 import com.example.demo.service.impl.Status;
 
 public interface UserService {
-	
+
 	User saveUser(User user);
 
 	List<User> getAllUsers();
-	
-	User logUserIn(User user, long id);
 
-	Status logoutUser(User user, long id);
+	User userLogin(User user, long id);
+
+	Status userLogout(User user, long id);
 }

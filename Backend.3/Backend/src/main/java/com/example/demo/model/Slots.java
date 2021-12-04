@@ -22,7 +22,7 @@ public class Slots {
 
 	@Column(name = "status", nullable = false)
 	@JsonProperty(value = "status")
-	// -1 ->  Available to use
+	// -1 -> Available to use
 	// 0 -> Visible to admin (under maintanance)
 	// 1 -> Not available, already booked
 	private int status;

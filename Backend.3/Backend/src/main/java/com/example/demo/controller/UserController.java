@@ -59,15 +59,13 @@ public class UserController {
 		for (User user : users) {
 			if (user.equals(newUser)) {
 				System.out.println("User Already exists!");
-				newUser.setUsername(null);
-				return newUser;
+				return null;
 			}
 		}
 		userRepository.save(newUser);
 		return newUser;
 	}
 
-	
 	@CrossOrigin
 	@PatchMapping("/login")
 	public ResponseEntity<User> loginUser(@Valid @RequestBody User user) {
@@ -76,10 +74,10 @@ public class UserController {
 
 		for (User other : users) {
 			if (other.equals(user)) {
-				return new ResponseEntity<User>(userService.logUserIn(other, other.getId()), HttpStatus.OK);
+				return new ResponseEntity<User>(userService.userLogin(other, other.getId()), HttpStatus.OK);
 			}
 		}
-		
+
 		user.setUsername(null);
 		return null;
 
@@ -87,14 +85,14 @@ public class UserController {
 
 	@CrossOrigin
 	@PatchMapping("/logout")
-	public Status logUserOut(@Valid @RequestBody User user) {
-		
+	public Status logoutUser(@Valid @RequestBody User user) {
+
 		List<User> users = userRepository.findAll();
 
 		for (User other : users) {
 			if (other.equals(user)) {
-				
-				return (userService.logoutUser(other, other.getId()));
+
+				return (userService.userLogout(other, other.getId()));
 			}
 		}
 
