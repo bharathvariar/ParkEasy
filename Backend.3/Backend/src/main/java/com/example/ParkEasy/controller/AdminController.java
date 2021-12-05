@@ -147,6 +147,12 @@ public class AdminController {
     }
 
     @CrossOrigin
+    @GetMapping("/slotcounter")
+    public List<SlotCounter> getSlotCounter() {
+        return adminService.getSlotCounter();
+    }
+    
+    @CrossOrigin
     @PatchMapping("/slotcounter/{id}")
     public ResponseEntity<SlotCounter> updateSlotCounter(@RequestBody SlotCounter slotCounter,
             @PathVariable ("id") long id) {

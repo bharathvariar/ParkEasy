@@ -101,6 +101,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public List<SlotCounter> getSlotCounter() {
+        return slotCounterRepository.findAll();
+    }
+
+    @Override
     public SlotCounter updateSlotCounter(SlotCounter slotcounter,long id) {
         SlotCounter existingslotcounter = slotCounterRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("SlotCounter", "Id", id));
