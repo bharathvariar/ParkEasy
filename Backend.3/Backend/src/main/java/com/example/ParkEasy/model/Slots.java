@@ -83,7 +83,7 @@ public class Slots {
 		if (bookedBy == "") {
 			this.bookedBy = bookedBy;
 		} else {
-			this.bookedBy += bookedBy;
+			this.bookedBy = this.bookedBy + "-" + bookedBy;
 		}
 	}
 

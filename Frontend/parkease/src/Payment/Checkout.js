@@ -30,23 +30,31 @@ function Copyright() {
 
 const steps = ["Shipping address", "Payment details", "Review your order"];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    case 2:
-      return <Review />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
-
 const theme = createTheme();
 
-export default function Checkout() {
+export default function Checkout(props) {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [order, setOrder] = React.useState(Math.floor(Math.random() * 1000000));
+  function getStepContent(step) {
+    switch (step) {
+      case 0:
+        return <AddressForm />;
+      case 1:
+        return <PaymentForm />;
+      case 2:
+        return (
+          <Review
+            id={props.location.state.id}
+            time1={props.location.state.time1}
+            time2={props.location.state.time2}
+            features={props.location.state.features}
+            bookedSlot={props.location.state.bookedSlot}
+          />
+        );
+      default:
+        throw new Error("Unknown step");
+    }
+  }
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -90,9 +98,9 @@ export default function Checkout() {
                   Thank you for your order.
                 </Typography>
                 <Typography variant='subtitle1'>
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
+                  {`Your order number is #${order}. We have recieved your order and
+                  Your slot has been booked successfully. Thank you for your
+                  order. We lookforward to serving you.`}
                 </Typography>
               </React.Fragment>
             ) : (

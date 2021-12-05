@@ -17,6 +17,7 @@ import { useHistory } from "react-router-dom";
 const theme = createTheme();
 
 function Services(props) {
+  console.log(props.location.state);
   const [state, setState] = React.useState({
     Valet: true,
     CarWash: false,
@@ -48,9 +49,6 @@ function Services(props) {
     axios
       .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[0]}`)
       .then((response) => {
-        var bookedBy = props.location.state.id.toString();
-        bookedBy = response.data.bookedBy.toString() + " " + bookedBy;
-        console.log(props.location.state.id);
         axios
           .put(
             `http://localhost:8080/parkeasy/slots/${bookedSlot[0]}/${props.location.state.id}`,
@@ -60,7 +58,7 @@ function Services(props) {
                 ? response.data.time + "," + time
                 : "" + time,
               chosenFeatures: response.data.chosenFeatures + "," + stri,
-              bookedBy: bookedBy,
+              bookedBy: "",
             }
           )
           .then((resp) => {
@@ -71,9 +69,6 @@ function Services(props) {
       axios
         .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[1]}`)
         .then((response) => {
-          console.log(response.data);
-          var bookedBy = props.location.state.id.toString();
-          bookedBy = response.data.bookedBy.toString() + " " + bookedBy;
           axios
             .put(
               `http://localhost:8080/parkeasy/slots/${bookedSlot[1]}/${props.location.state.id}`,
@@ -83,7 +78,7 @@ function Services(props) {
                   ? response.data.time + "," + time
                   : "" + time,
                 chosenFeatures: response.data.chosenFeatures + "," + stri,
-                bookedBy: bookedBy,
+                bookedBy: "",
               }
             )
             .then((resp) => {
@@ -95,8 +90,6 @@ function Services(props) {
       axios
         .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[2]}`)
         .then((response) => {
-          var bookedBy = props.location.state.id.toString();
-          bookedBy = response.data.bookedBy.toString() + " " + bookedBy;
           console.log(response.data);
           axios
             .put(
@@ -107,7 +100,7 @@ function Services(props) {
                   ? response.data.time + "," + time
                   : "" + time,
                 chosenFeatures: response.data.chosenFeatures + "," + stri,
-                bookedBy: bookedBy,
+                bookedBy: "",
               }
             )
             .then((resp) => {
@@ -115,7 +108,16 @@ function Services(props) {
             });
         });
     }
-    history.push("/checkout");
+    history.push({
+      pathname: "/checkout",
+      state: {
+        time1: props.location.state.value,
+        time2: props.location.state.value2,
+        id: props.location.state.id,
+        bookedSlot: props.location.state.bookedSlot,
+        features: state,
+      },
+    });
   };
   return (
     <ThemeProvider theme={theme}>
