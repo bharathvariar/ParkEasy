@@ -60,6 +60,7 @@ export default function WelcomeDetails(props) {
         value: value,
         value2: value2,
         user: props.user,
+        id: props.id,
       },
     });
   };

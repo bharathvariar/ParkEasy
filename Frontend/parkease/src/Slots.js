@@ -31,55 +31,63 @@ function Slots(props) {
     axios.get("http://localhost:8080/parkeasy/slots/show").then((resp) => {
       console.log(resp.data[0]);
       var counter = 1;
-      for (var k = 0; k < 6; k++) {
-        arr = [];
-        for (var j = 0; j < 6; j++) {
-          console.log("j=" + j);
-          var lst = {};
-          lst["id"] = counter;
-          lst["isReserved"] = false;
-          lst["number"] = counter;
-          console.log("counter+ " + counter);
-          if (resp.data[counter - 1].status != 0) {
-            if (resp.data[counter - 1].time == "") {
-              lst["isReserved"] = false;
-            } else {
-              var s = resp.data[counter - 1].time;
-              lst["isReserved"] = false;
-              var part = s.split("-");
-              console.log("part+ " + part);
-              console.log(typeof part);
+      axios
+        .get("http://localhost:8080/parkeasy/admin/slotcounter")
+        .then((response) => {
+          console.log(response.data);
+          var num = response.data;
+          for (var k = 0; k < Number(response.data[0].NumSlots); k++) {
+            arr = [];
 
-              var parts = part.toString().split(",");
-              console.log("parts+ " + parts);
-              console.log("parts[1] " + parts[2]);
-              for (var i = 0; i < parts.length; i += 2) {
-                console.log(props.location.state.value.getTime());
-                console.log(Number(parts[i]));
-                if (
-                  Number(parts[i]) >=
-                    Number(props.location.state.value.getTime()) &&
-                  Number(parts[i]) <=
-                    Number(props.location.state.value.getTime())
-                ) {
-                  console.log("anirudh");
-                  lst["isReserved"] = true;
-                } else if (
-                  Number(parts[i]) <= props.location.state.value.getTime() &&
-                  Number(parts[i]) >= props.location.state.value.getTime()
-                ) {
-                  lst["isReserved"] = true;
+            console.log(num);
+            for (var j = 0; j < 6; j++) {
+              console.log("j=" + j);
+              var lst = {};
+              lst["id"] = counter;
+              lst["isReserved"] = false;
+              lst["number"] = counter;
+              console.log("counter+ " + counter);
+              if (resp.data[counter - 1].status != 0) {
+                if (resp.data[counter - 1].time == "") {
+                  lst["isReserved"] = false;
+                } else {
+                  var s = resp.data[counter - 1].time;
+                  lst["isReserved"] = false;
+                  var part = s.split("-");
+                  console.log("part+ " + part);
+                  console.log(typeof part);
+
+                  var parts = part.toString().split(",");
+                  console.log("parts+ " + parts);
+                  console.log("parts[1] " + parts[2]);
+                  for (var i = 0; i < parts.length; i += 2) {
+                    console.log(props.location.state.value.getTime());
+                    console.log(Number(parts[i]));
+                    if (
+                      Number(parts[i]) >=
+                        Number(props.location.state.value.getTime()) &&
+                      Number(parts[i]) <=
+                        Number(props.location.state.value.getTime())
+                    ) {
+                      lst["isReserved"] = true;
+                    } else if (
+                      Number(parts[i]) <=
+                        props.location.state.value.getTime() &&
+                      Number(parts[i]) >= props.location.state.value.getTime()
+                    ) {
+                      lst["isReserved"] = true;
+                    }
+                  }
                 }
               }
+              counter++;
+              arr.push(lst);
+              if (counter % 2 == 0) arr.push(null);
             }
-          }
-          counter++;
-          arr.push(lst);
-          if (counter % 2 == 0) arr.push(null);
-        }
 
-        row.push(arr);
-      }
+            row.push(arr);
+          }
+        });
     });
     return () => {
       row = [];
@@ -92,6 +100,7 @@ function Slots(props) {
         value: props.location.state.value,
         value2: props.location.state.value2,
         bookedSlot: bookedSlot,
+        id: props.location.state.id,
       },
     });
   };

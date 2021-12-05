@@ -9,6 +9,8 @@ function Navbar(props) {
   const logout = () => {};
   return (
     <div className='navbar'>
+      {/* <li>logo</li> */}
+      {/* <img className='navbar__image' src={logo} alt='' /> */}
       <li className='navbar__link'>PARKEASY</li>
 
       <Link
