@@ -124,6 +124,9 @@ function App() {
         }
       });
   };
+  const handleGoogleLogin = (resp) => {
+    setUser(resp.profileObj.givenName);
+  };
   const handleLogout = () => {
     axios
       .patch(`http://localhost:8080/parkeasy/user/logout`, {
@@ -148,7 +151,11 @@ function App() {
           <Route
             path='/Signin'
             component={() => (
-              <SignIn handleLogin={handleSubmitSign} user={user} />
+              <SignIn
+                handleLogin={handleSubmitSign}
+                user={user}
+                handleGoogle={handleGoogleLogin}
+              />
             )}
           />
           <Route path='/Pricing' component={PricingContent} />
