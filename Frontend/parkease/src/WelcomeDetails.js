@@ -110,7 +110,7 @@ export default function WelcomeDetails(props) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                       label='Pick Date'
                       inputFormat='MM/dd/yyyy'
@@ -118,7 +118,7 @@ export default function WelcomeDetails(props) {
                       onChange={handleChange}
                       renderInput={(params) => <TextField {...params} />}
                     />
-                  </LocalizationProvider>
+                  </LocalizationProvider> */}
                 </Grid>
                 <Grid item xs={12}>
                   <LocalizationProvider dateAdapter={AdapterDateFns}>

@@ -60,17 +60,19 @@ export default function Review(props) {
             <ListItemText
               primary={product.name}
               secondary={
-                ((Number(props.time2.getTime()) -
-                  Number(props.time1.getTime())) /
-                  3600000) *
-                25
+                Math.floor(
+                  (Number(props.time2.getTime()) -
+                    Number(props.time1.getTime())) /
+                    3600000
+                ) * 25
               }
             />
             <Typography variant='body2'>
-              {((Number(props.time2.getTime()) -
-                Number(props.time1.getTime())) /
-                3600000) *
-                25}
+              {Math.floor(
+                (Number(props.time2.getTime()) -
+                  Number(props.time1.getTime())) /
+                  3600000
+              ) * 25}
             </Typography>
           </ListItem>
         ))}
@@ -83,8 +85,10 @@ export default function Review(props) {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary='Total' />
           <Typography variant='subtitle1' sx={{ fontWeight: 700 }}>
-            {((Number(props.time2.getTime()) - Number(props.time1.getTime())) /
-              3600000) *
+            {Math.floor(
+              (Number(props.time2.getTime()) - Number(props.time1.getTime())) /
+                3600000
+            ) *
               25 +
               costss}
           </Typography>
