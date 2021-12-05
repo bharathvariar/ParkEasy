@@ -48,15 +48,21 @@ function Services(props) {
     axios
       .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[0]}`)
       .then((response) => {
-        console.log(response.data);
+        var bookedBy = props.location.state.id.toString();
+        bookedBy = response.data.bookedBy.toString() + " " + bookedBy;
+        console.log(props.location.state.id);
         axios
-          .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[0]}`, {
-            status: 1,
-            time: response.data.time
-              ? response.data.time + "," + time
-              : "" + time,
-            chosenFeatures: response.data.chosenFeatures + "," + stri,
-          })
+          .put(
+            `http://localhost:8080/parkeasy/slots/${bookedSlot[0]}/${props.location.state.id}`,
+            {
+              status: 1,
+              time: response.data.time
+                ? response.data.time + "," + time
+                : "" + time,
+              chosenFeatures: response.data.chosenFeatures + "," + stri,
+              bookedBy: bookedBy,
+            }
+          )
           .then((resp) => {
             console.log(resp.data);
           });
@@ -66,14 +72,20 @@ function Services(props) {
         .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[1]}`)
         .then((response) => {
           console.log(response.data);
+          var bookedBy = props.location.state.id.toString();
+          bookedBy = response.data.bookedBy.toString() + " " + bookedBy;
           axios
-            .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[1]}`, {
-              status: 1,
-              time: response.data.time
-                ? response.data.time + "," + time
-                : "" + time,
-              chosenFeatures: response.data.chosenFeatures + "," + stri,
-            })
+            .put(
+              `http://localhost:8080/parkeasy/slots/${bookedSlot[1]}/${props.location.state.id}`,
+              {
+                status: 1,
+                time: response.data.time
+                  ? response.data.time + "," + time
+                  : "" + time,
+                chosenFeatures: response.data.chosenFeatures + "," + stri,
+                bookedBy: bookedBy,
+              }
+            )
             .then((resp) => {
               console.log(resp.data);
             });
@@ -83,15 +95,21 @@ function Services(props) {
       axios
         .get(`http://localhost:8080/parkeasy/slots/${bookedSlot[2]}`)
         .then((response) => {
+          var bookedBy = props.location.state.id.toString();
+          bookedBy = response.data.bookedBy.toString() + " " + bookedBy;
           console.log(response.data);
           axios
-            .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[2]}`, {
-              status: 1,
-              time: response.data.time
-                ? response.data.time + "," + time
-                : "" + time,
-              chosenFeatures: response.data.chosenFeatures + "," + stri,
-            })
+            .put(
+              `http://localhost:8080/parkeasy/slots/${bookedSlot[2]}/${props.location.state.id}`,
+              {
+                status: 1,
+                time: response.data.time
+                  ? response.data.time + "," + time
+                  : "" + time,
+                chosenFeatures: response.data.chosenFeatures + "," + stri,
+                bookedBy: bookedBy,
+              }
+            )
             .then((resp) => {
               console.log(resp.data);
             });
@@ -124,7 +142,7 @@ function Services(props) {
                     name='Valet'
                   />
                 }
-                label='Valet'
+                label='Valet Parking'
               />
               <Typography variant='button' display='block' gutterBottom>
                 ₹50/-

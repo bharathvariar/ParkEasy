@@ -15,6 +15,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
+import { Alert } from "@mui/material";
 
 const theme = createTheme();
 const columns = [
@@ -78,7 +79,16 @@ function AdminPortal(props) {
   }, []);
   const handleChange = (event) => {
     event.preventDefault();
-    setLop([]);
+    let data = new FormData(event.currentTarget);
+    console.log(data.get("rows"));
+    axios
+      .patch(`http://localhost:8080/parkeasy/admin/slotcounter/1`, {
+        id: 1,
+        NumSlots: data.get("rows"),
+      })
+      .then((response) => {
+        console.log(response);
+      });
   };
   const handleAddWorker = (event) => {
     event.preventDefault();
@@ -189,6 +199,7 @@ function AdminPortal(props) {
             id='outlined-basic'
             label='Add Rows'
             variant='outlined'
+            name='rows'
           />
           <Button
             type='submit'

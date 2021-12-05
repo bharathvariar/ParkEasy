@@ -16,11 +16,13 @@ import Checkout from "./Payment/Checkout";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
 import OTPverification from "./OTPverification";
+import { setISODay } from "date-fns";
 
 function App() {
   const [user, setUser] = useState(null);
   const [password, setPassword] = useState(null);
   const [admin, setAdmin] = useState(null);
+  const [id, setId] = useState(null);
   const [adminPass, setAdminPass] = useState(null);
   var history = useHistory();
 
@@ -92,6 +94,8 @@ function App() {
           console.log(response.data);
           setUser(response.data.username);
           setPassword(response.data.password);
+          console.log(response.data.id);
+          setId(response.data.id);
           // history.push("/Welcome");
           return "success";
         }
@@ -155,6 +159,7 @@ function App() {
                 handleLogin={handleSubmitSign}
                 user={user}
                 handleGoogle={handleGoogleLogin}
+                id={id}
               />
             )}
           />
@@ -163,7 +168,7 @@ function App() {
           <Route path='/Slots' component={Slots} />
           <Route
             path='/Welcome'
-            component={() => <WelcomeDetails user={user} />}
+            component={() => <WelcomeDetails user={user} id={id} />}
           />
           <Route path='/services' component={Services} />
           <Route
