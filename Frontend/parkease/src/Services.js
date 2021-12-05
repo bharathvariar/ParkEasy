@@ -52,7 +52,9 @@ function Services(props) {
         axios
           .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[0]}`, {
             status: 1,
-            time: response.data.time ? response.data.time + "," : "" + time,
+            time: response.data.time
+              ? response.data.time + "," + time
+              : "" + time,
             chosenFeatures: response.data.chosenFeatures + "," + stri,
           })
           .then((resp) => {
@@ -67,7 +69,9 @@ function Services(props) {
           axios
             .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[1]}`, {
               status: 1,
-              time: response.data.time ? response.data.time + "," : "" + time,
+              time: response.data.time
+                ? response.data.time + "," + time
+                : "" + time,
               chosenFeatures: response.data.chosenFeatures + "," + stri,
             })
             .then((resp) => {
@@ -83,7 +87,9 @@ function Services(props) {
           axios
             .put(`http://localhost:8080/parkeasy/slots/${bookedSlot[2]}`, {
               status: 1,
-              time: response.data.time ? response.data.time + "," : "" + time,
+              time: response.data.time
+                ? response.data.time + "," + time
+                : "" + time,
               chosenFeatures: response.data.chosenFeatures + "," + stri,
             })
             .then((resp) => {

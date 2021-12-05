@@ -37,7 +37,9 @@ export default function SignIn(props) {
   let history = useHistory();
   function handleSubmit(event) {
     var isSuc = props.handleLogin(event);
-    history.push("/Welcome");
+    setTimeout(() => {
+      history.push("/Welcome");
+    }, 3000);
   }
   return (
     <ThemeProvider theme={theme}>

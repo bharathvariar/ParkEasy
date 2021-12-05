@@ -15,6 +15,7 @@ import Slots from "./Slots";
 import Checkout from "./Payment/Checkout";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from "react";
+import OTPverification from "./OTPverification";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,6 +23,7 @@ function App() {
   const [admin, setAdmin] = useState(null);
   const [adminPass, setAdminPass] = useState(null);
   var history = useHistory();
+
   const handleSubmitRegister = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,10 +46,29 @@ function App() {
         if (response == "") {
           alert("User already taken");
         } else {
+          alert("succefuly registered");
+
           console.log(parts[0]);
           // setUser(response.data.username);
         }
       });
+  };
+  const handleOTP = (event) => {
+    event.preventDefault();
+    let otp = Math.random();
+    otp = otp.toString();
+    otp = otp[2] + otp[3] + otp[4] + otp[5] + otp[6] + otp[7];
+    localStorage.setItem("otp", otp);
+    const data = new FormData(event.currentTarget);
+    window.Email.send({
+      Host: "smtp.gmail.com",
+      Username: "parkeasy.help@gmail.com",
+      Password: "parking@123",
+      To: data.get("email"),
+      From: "parkeasy.help@gmail.com",
+      Subject: "Registration OTP",
+      Body: `Your OTP is ${otp}`,
+    }).then((message) => alert(message));
   };
   const handleSubmitSign = (event) => {
     event.preventDefault();
@@ -122,7 +143,7 @@ function App() {
           <Route path='/' exact component={HomePage} />
           <Route
             path='/Signup'
-            component={() => <Signup handleRegister={handleSubmitRegister} />}
+            component={() => <Signup handleRegister={handleOTP} />}
           />
           <Route
             path='/Signin'
@@ -141,15 +162,24 @@ function App() {
           <Route
             path='/AdminSignin'
             component={() => (
-              <AdminSignin handleLogin={handleSubmitAdminSign} user={user} />
+              <AdminSignin
+                handleLogin={handleSubmitAdminSign}
+                user={user}
+                admin={admin}
+              />
             )}
           />
           <Route
             path='/AdminPortal'
             component={() => (
-              <AdminPortal handleLogin={handleSubmitAdminSign} user={user} />
+              <AdminPortal
+                handleLogin={handleSubmitAdminSign}
+                user={user}
+                admin={admin}
+              />
             )}
           />
+          <Route path='/Verification' component={OTPverification} />
         </Switch>
       </div>
     </Router>
