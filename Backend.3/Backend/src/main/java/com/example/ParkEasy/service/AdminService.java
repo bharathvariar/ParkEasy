@@ -30,6 +30,8 @@ public interface AdminService {
 
     SlotCounter saveSlotCounter(SlotCounter slotcounter);
 
+    List<SlotCounter> getSlotCounter();
+
     SlotCounter updateSlotCounter(SlotCounter slotcounter, long id);
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.ParkEasy.model.Slots;
+import com.example.ParkEasy.model.User;
 import com.example.ParkEasy.service.SlotsService;
 
 import org.springframework.http.HttpStatus;
@@ -51,11 +52,11 @@ public class SlotsController {
 	}
 
 	@CrossOrigin
-	@PutMapping("{id}")
-	public ResponseEntity<Slots> updateSlot(@PathVariable("id") long id,
-			@RequestBody Slots slot, String chosenFeatures) {
+	@PutMapping("{id}/{userId}")
+	public ResponseEntity<Slots> updateSlot(@PathVariable("id") long id, @PathVariable("userId") long userId,
+			@RequestBody Slots slot) {
 
-		return new ResponseEntity<Slots>(slotsService.updateSlots(slot, id, chosenFeatures),
+		return new ResponseEntity<Slots> (slotsService.updateSlots(slot, id, userId),
 				HttpStatus.OK);
 
 	}
