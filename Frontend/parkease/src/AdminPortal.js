@@ -108,6 +108,38 @@ function AdminPortal(props) {
           });
       });
   };
+  const removeSelected = () => {
+    if (selectionModel.length > 1) alert("Please Chose One worker");
+    else {
+      var worker = selectionModel[0];
+      console.log(worker);
+      axios
+        .delete(`http://localhost:8080/parkeasy/worker/delete/${worker}`)
+        .then((resp) => {
+          if (resp.data == "DELETED") {
+            axios
+              .get("http://localhost:8080/parkeasy/admin/worker/show")
+              .then((resp) => {
+                console.log(resp.data);
+                for (var k = 0; k < resp.data.length; k++) {
+                  var lst = {
+                    id: resp.data[k].id,
+                    fullName: resp.data[k].name,
+                    Phone: resp.data[k].phone,
+                    CheckedIn: resp.data[k].isAvailable,
+                  };
+                  rows = Object.assign([], rows);
+                  rows.push(lst);
+                }
+                console.log(rows);
+                setLop(rows);
+              });
+          } else {
+            alert("error");
+          }
+        });
+    }
+  };
   const handleAdmin = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -120,7 +152,7 @@ function AdminPortal(props) {
         alert(`Admin added with id ${resp.data.adminId}`);
       });
   };
-  return (
+  return props.admin ? (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       {/* <h1>{props.location.state.counter}</h1> */}
@@ -137,6 +169,11 @@ function AdminPortal(props) {
           }}
           selectionModel={selectionModel}
         />
+      </Box>
+      <Box sx={{ marginTop: "30px", marginLeft: "20px" }}>
+        <Button variant='outlined' color='error' onClick={removeSelected}>
+          Remove Selected Worker
+        </Button>
       </Box>
       <Box
         sx={{
@@ -218,6 +255,8 @@ function AdminPortal(props) {
         </Box>
       </Box>
     </ThemeProvider>
+  ) : (
+    <></>
   );
 }
 

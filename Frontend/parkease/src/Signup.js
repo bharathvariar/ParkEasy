@@ -57,8 +57,22 @@ export default function SignUp(props) {
   // };
   let history = useHistory();
   const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
     props.handleRegister(event);
-    history.push("/Signin");
+    setTimeout(() => {
+      history.push({
+        pathname: "/Verification",
+        search: "?query=abc",
+        state: {
+          firstName: data.get("firstName"),
+          lastName: data.get("lastName"),
+          username: data.get("username"),
+          email: data.get("email"),
+          password: data.get("password"),
+        },
+      });
+    }, 3000);
   };
   return (
     <ThemeProvider theme={theme}>

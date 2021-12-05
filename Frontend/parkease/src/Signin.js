@@ -13,6 +13,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import GoogleLogin from "react-google-login";
+import { GoogleLogout } from "react-google-login";
 
 function Copyright(props) {
   return (
@@ -35,9 +37,19 @@ const theme = createTheme();
 
 export default function SignIn(props) {
   let history = useHistory();
+  const responseGoogle = (response) => {
+    console.log(response.profileObj.givenName);
+    props.handleGoogle(response);
+    setTimeout(() => {
+      history.push("/Welcome");
+    }, 3000);
+  };
+  const logout = () => {};
   function handleSubmit(event) {
     var isSuc = props.handleLogin(event);
-    history.push("/Welcome");
+    setTimeout(() => {
+      history.push("/Welcome");
+    }, 3000);
   }
   return (
     <ThemeProvider theme={theme}>
@@ -96,6 +108,21 @@ export default function SignIn(props) {
               }}>
               Sign In
             </Button>
+            <Box sx={{ display: "flex", justifyContent: "space-around" }}>
+              <GoogleLogin
+                clientId='535747882617-n3bh3il068puog2bnsag8pgon18p0jis.apps.googleusercontent.com'
+                buttonText='Login'
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+                isSignedIn={true}
+              />
+              <GoogleLogout
+                clientId='535747882617-n3bh3il068puog2bnsag8pgon18p0jis.apps.googleusercontent.com'
+                buttonText='Logout'
+                onLogoutSuccess={logout}></GoogleLogout>
+            </Box>
+
             <Grid container>
               <Grid item xs>
                 <Link href='#' variant='body2'>

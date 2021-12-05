@@ -39,6 +39,10 @@ export default function AdminSignin(props) {
     props.handleLogin(event);
     history.push({
       pathname: "/AdminPortal",
+      search: "?query=abc",
+      state: {
+        admin: props.admin,
+      },
     });
   }
   return (

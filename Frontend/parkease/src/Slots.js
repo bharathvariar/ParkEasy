@@ -24,8 +24,8 @@ function Slots(props) {
   var arr = [];
   var bookedSlot = [];
   let history = useHistory();
-  console.log(props.location.state.value.getTime());
-  console.log(props.location.state.value2.getTime());
+  // console.log(props.location.state.value.getTime());
+  // console.log(props.location.state.value2.getTime());
 
   React.useEffect(() => {
     axios.get("http://localhost:8080/parkeasy/slots/show").then((resp) => {
@@ -46,22 +46,27 @@ function Slots(props) {
             } else {
               var s = resp.data[counter - 1].time;
               lst["isReserved"] = false;
-              var part = s.split(",");
+              var part = s.split("-");
               console.log("part+ " + part);
               console.log(typeof part);
 
-              var parts = part.toString().split("-");
+              var parts = part.toString().split(",");
               console.log("parts+ " + parts);
-              console.log("parts[0] " + parts[0]);
+              console.log("parts[1] " + parts[2]);
               for (var i = 0; i < parts.length; i += 2) {
+                console.log(props.location.state.value.getTime());
+                console.log(Number(parts[i]));
                 if (
-                  Number(parts[1]) >= props.location.state.value.getTime() &&
-                  Number(parts[0]) <= props.location.state.value.getTime()
+                  Number(parts[i]) >=
+                    Number(props.location.state.value.getTime()) &&
+                  Number(parts[i]) <=
+                    Number(props.location.state.value.getTime())
                 ) {
+                  console.log("anirudh");
                   lst["isReserved"] = true;
                 } else if (
-                  Number(parts[1]) <= props.location.state.value.getTime() &&
-                  Number(parts[0]) >= props.location.state.value.getTime()
+                  Number(parts[i]) <= props.location.state.value.getTime() &&
+                  Number(parts[i]) >= props.location.state.value.getTime()
                 ) {
                   lst["isReserved"] = true;
                 }
@@ -107,7 +112,7 @@ function Slots(props) {
     addCb(row, number, id, newTooltip);
   };
   row = [[{ id: 100, number: "GO" }]];
-  return (
+  return props.location.state.user ? (
     <ThemeProvider theme={theme}>
       <Container component='main' maxWidth='xs'>
         <CssBaseline />
@@ -153,6 +158,8 @@ function Slots(props) {
         </Box>
       </Container>
     </ThemeProvider>
+  ) : (
+    <></>
   );
 }
 

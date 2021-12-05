@@ -1,13 +1,16 @@
 import React from "react";
+
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 function Navbar(props) {
   const handleClick = () => {
     props.handleLogout();
   };
+  const logout = () => {};
   return (
     <div className='navbar'>
       <li className='navbar__link'>PARKEASY</li>
+
       <Link
         className='navbar__link'
         to={props.user ? "" : "/Signin"}

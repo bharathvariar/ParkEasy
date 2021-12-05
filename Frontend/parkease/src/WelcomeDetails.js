@@ -59,6 +59,7 @@ export default function WelcomeDetails(props) {
       state: {
         value: value,
         value2: value2,
+        user: props.user,
       },
     });
   };
