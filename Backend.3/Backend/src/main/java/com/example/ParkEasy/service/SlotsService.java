@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.example.ParkEasy.model.Slots;
+import com.example.ParkEasy.model.User;
 
 public interface SlotsService {
 
@@ -13,6 +14,6 @@ public interface SlotsService {
 
 	List<Slots> getAllSlots();
 
-	Slots updateSlots(Slots slot, long id, String chosenFeatures);
+	Slots updateSlots(Slots slot, long id, long userId);
 
 }

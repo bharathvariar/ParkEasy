@@ -39,6 +39,10 @@ public class Slots {
 	// 3 -> Quick Service
 	private String chosenFeatures;
 
+	@Column(name = "bookedBy", nullable = false)
+	@JsonProperty(value = "bookedBy")
+	private String bookedBy;
+
 	public long getId() {
 		return id;
 	}
@@ -69,6 +73,18 @@ public class Slots {
 
 	public void setChosenFeatures(String chosenFeatures) {
 		this.chosenFeatures = chosenFeatures;
+	}
+
+	public String getBookedBy() {
+		return bookedBy;
+	}
+
+	public void setBookedBy(String bookedBy) {
+		if (bookedBy == "") {
+			this.bookedBy = bookedBy;
+		} else {
+			this.bookedBy += bookedBy;
+		}
 	}
 
 }
