@@ -130,6 +130,7 @@ function App() {
   };
   const handleGoogleLogin = (resp) => {
     setUser(resp.profileObj.givenName);
+    setId(12);
   };
   const handleLogout = () => {
     axios
