@@ -41,8 +41,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function WelcomeDetails(props) {
-  const [value, setValue] = React.useState(new Date("2021-12-05T21:11:54"));
-  const [value2, setValue2] = React.useState(new Date("2021-12-05T21:11:54"));
+  const [value, setValue] = React.useState(new Date("2021-12-07T22:10:54"));
+  const [value2, setValue2] = React.useState(new Date("2021-12-07T22:10:54"));
   let time1, time2;
   let history = useHistory();
   const handleChange = (newValue) => {
