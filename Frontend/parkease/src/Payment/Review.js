@@ -5,9 +5,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 
-const products = [];
-const services = [];
-let cost = 0;
+// const products = [];
+// const services = [];
+// let cost = 0;
 const addresses = [
   "S-111",
   "Shankar Bhavan",
@@ -16,8 +16,8 @@ const addresses = [
   "Telangana",
 ];
 const payments = [
-  { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Adit Danewa" },
+  { name: "Card type", detail: "None" },
+  { name: "Card holder", detail: "Anirudh Singh" },
   { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
   { name: "Expiry date", detail: "04/2024" },
 ];
@@ -29,25 +29,49 @@ export default function Review(props) {
   const [costss, setCostss] = React.useState(0);
   React.useEffect(() => {
     for (let k = 0; k < props.bookedSlot.length; k++) {
-      products.push({
-        name: "HYD" + props.bookedSlot[k],
-      });
+      setProductss((productss) => [
+        ...productss,
+        {
+          name: "HYD0" + props.bookedSlot[k],
+        },
+      ]);
     }
-    if (props.features["Vale"] == true)
-      services.push({ name: "Vale Parking", cost: 50 });
+
     if (props.features["CarWash"] == true)
-      services.push({ name: "Car Washing", cost: 500 });
+      setServicess((servicess) => [
+        ...servicess,
+        { name: "Car Wash", cost: 500 },
+      ]);
+    if (props.features["Valet"] == true)
+      setServicess((servicess) => [
+        ...servicess,
+        { name: "Vale Parking", cost: 50 },
+      ]);
     if (props.features["DeepClean"] == true)
-      services.push({ name: "Deep Clean", cost: 2500 });
-    console.log(services);
-    setServicess(services);
-    setProductss(products);
-    for (var l = 0; l < services.length; l++) {
-      cost += services[l].cost;
-    }
-    console.log(services);
-    setCostss(cost);
-    return () => {};
+      setServicess((servicess) => [
+        ...servicess,
+        { name: "Deep Clean", cost: 2500 },
+      ]);
+    // console.log(services);
+    // setServicess(services);
+    // setProductss(products);
+    // for (var l = 0; l < 3; l++) {
+    //   // cost += servicess[l].cost;
+    //   setCostss((costss) => costss + servicess[l].cost);
+    // }
+    if (props.features["Valet"] == true) setCostss((costss) => costss + 50);
+    if (props.features["CarWash"] == true) setCostss((costss) => costss + 500);
+    if (props.features["DeepClean"] == true)
+      setCostss((costss) => costss + 2500);
+    // console.log(services);
+    return () => {
+      setProductss([]);
+      setServicess([]);
+      setCostss(0);
+      // products = [];
+      // const products = [];
+      // cost = 0;
+    };
   }, []);
   return (
     <React.Fragment>
@@ -60,17 +84,19 @@ export default function Review(props) {
             <ListItemText
               primary={product.name}
               secondary={
-                ((Number(props.time2.getTime()) -
-                  Number(props.time1.getTime())) /
-                  3600000) *
-                25
+                Math.floor(
+                  (Number(props.time2.getTime()) -
+                    Number(props.time1.getTime())) /
+                    3600000
+                ) * 25
               }
             />
             <Typography variant='body2'>
-              {((Number(props.time2.getTime()) -
-                Number(props.time1.getTime())) /
-                3600000) *
-                25}
+              {Math.floor(
+                (Number(props.time2.getTime()) -
+                  Number(props.time1.getTime())) /
+                  3600000
+              ) * 25}
             </Typography>
           </ListItem>
         ))}
@@ -83,9 +109,12 @@ export default function Review(props) {
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary='Total' />
           <Typography variant='subtitle1' sx={{ fontWeight: 700 }}>
-            {((Number(props.time2.getTime()) - Number(props.time1.getTime())) /
-              3600000) *
-              25 +
+            {Math.floor(
+              (Number(props.time2.getTime()) - Number(props.time1.getTime())) /
+                3600000
+            ) *
+              25 *
+              props.bookedSlot.length +
               costss}
           </Typography>
         </ListItem>

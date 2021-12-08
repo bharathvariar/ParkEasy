@@ -42,14 +42,14 @@ export default function SignIn(props) {
     props.handleGoogle(response);
     setTimeout(() => {
       history.push("/Welcome");
-    }, 3000);
+    }, 2000);
   };
   const logout = () => {};
   function handleSubmit(event) {
     var isSuc = props.handleLogin(event);
     setTimeout(() => {
       history.push("/Welcome");
-    }, 3000);
+    }, 1000);
   }
   return (
     <ThemeProvider theme={theme}>
