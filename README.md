@@ -1,5 +1,5 @@
 # ParkEasy
-ParkEasy is a website that books parking slots in advance for people travelling to crowded locations.
+ParkEasy is a website that books parking slots in advance for people travelling to crowded locations.\
 Proect done as a part of the course CS F213: Object Oriented Programming
 
 ## To Run
